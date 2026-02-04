@@ -500,7 +500,9 @@ open class PagingViewController:
     open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         didTransitionSize = false
-        didLayoutSubviews = false
+        /// v4.1.1，不需要重置 didLayoutSubviews。
+        /// 因为在 iOS26 环境下，从其它页面 pop 返回的时候，如果此属性被重置，由于 UITabBar 的变化则会导致 viewDidLayoutSubviews 被调用。导致其子页面的 scrollview 被滚动会顶部。
+//        didLayoutSubviews = false
     }
 
     open override func viewDidLayoutSubviews() {
